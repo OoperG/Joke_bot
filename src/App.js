@@ -6,13 +6,15 @@ import {useState} from "react";
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
 import Spinner from 'react-bootstrap/Spinner'
+import Placeholder from 'react-bootstrap/Placeholder';
 
 function App() {
 
     const [loading, setLoading] = useState(false);
-    const [obj, setObj] = useState();
+    const [obj, setObj] = useState("");
+    const apiKey = process.env.REACT_APP_API_KEY;
     const [payload, setPayLoad] = useState({
-        prompt: "",
+        prompt: "Fait moi une blague sur ",
         temperature: 0.5,
         max_tokens: 100,
         n: 1,
@@ -28,7 +30,7 @@ function App() {
             headers: {
                 "Content-Type": "application/json",
                 Authorization:
-                    "Bearer Your_API_Key"
+                    "Bearer " + apiKey
             }
         })
             .then((res) => {
@@ -48,6 +50,11 @@ function App() {
         }
     };
 
+    const serviceDown = () => {
+        setObj("Service is down, please try again later (Désolé little blond)");
+        //setLoading(false);
+    }
+
     return (
         <div className="container d-flex justify-content-center align-items-center">
             <div className="row">
@@ -60,7 +67,7 @@ function App() {
                                     <Form.Label>Your Joke ?</Form.Label>
                                     <Form.Control
                                         type="email"
-                                        placeholder="Fait moi une blague sur..."
+                                        placeholder="Fais moi une blague sur..."
                                         onChange={(e) => {
                                             setPayLoad({
                                                 ...payload,
@@ -71,10 +78,29 @@ function App() {
                                         We'll never share your email with anyone else.
                                     </Form.Text>*/}
                                 </Form.Group>
-                                {obj ? <Form.Group className="mb-3">
-                                        <Form.Label>{obj}</Form.Label>
-                                    </Form.Group> :
-                                    null}
+                                {obj ?
+                                    <div className="container d-flex justify-content-center">
+                                        <div className="row">
+                                            <div className="col">
+                                                <Form.Group className="mb-3">
+                                                    <Form.Label>{obj}</Form.Label>
+                                                </Form.Group>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    : null
+                                }
+                                {loading ?
+                                    <div className="container d-flex justify-content-center">
+                                        <div className="row">
+                                            <div className="col">
+                                                <Placeholder as="p" animation="glow">
+                                                    <Placeholder xs={12}/>
+                                                </Placeholder>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    : null}
                                 {loading ?
                                     <div className="container d-flex justify-content-center">
                                         <div className="row">
