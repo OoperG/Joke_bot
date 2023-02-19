@@ -66,17 +66,17 @@ function Joke() {
             <div className="container d-flex justify-content-center align-items-center mt-5">
                 <div className="row">
                     <div className="col">
-                        <Card>
+                        <Card className="w-100 mx-100">
                             <Card.Body>
                                 <Card.Title>Chat With Joke_Bot</Card.Title>
                                 <Form>
-                                    <InputGroup className="mb-3 mt-3">
-                                        <InputGroup.Text id="basic-addon1">Fais moi une blague sur...</InputGroup.Text>
+                                    <InputGroup className="mb-3 mt-5">
+                                        <InputGroup.Text id="basic-addon1">Fait moi une blague sur...</InputGroup.Text>
                                         <Form.Control
-                                            placeholder="les blondes"
+                                            placeholder="Les blondes"
                                             aria-label="Username"
                                             aria-describedby="basic-addon1"
-                                            onChange={(e)=> setPrompt(e.target.value)}/>
+                                            onChange={(e) => setPrompt(e.target.value)}/>
                                     </InputGroup>
                                     {obj ?
                                         <div className="container d-flex justify-content-center">
