@@ -73,7 +73,7 @@ function Joke() {
                                     <InputGroup className="mb-3 mt-3">
                                         <InputGroup.Text id="basic-addon1">Fais moi une blague sur...</InputGroup.Text>
                                         <Form.Control
-                                            placeholder="Username"
+                                            placeholder="les blondes"
                                             aria-label="Username"
                                             aria-describedby="basic-addon1"
                                             onChange={(e)=> setPrompt(e.target.value)}/>
