@@ -24,10 +24,10 @@ function Joke() {
     });
 
     const getRes = () => {
-        //setLoading(true);
+        payload.prompt = "Fait moi une blague sur ";
+        setLoading(true);
         payload.prompt = payload.prompt + prompt;
         console.log(payload.prompt);
-        /*
         axios({
             method: "POST",
             url: "https://api.openai.com/v1/completions",
@@ -45,7 +45,7 @@ function Joke() {
             .catch((e) => {
                 setLoading(false);
                 console.log(e.message, e);
-            });*/
+            });
     };
 
     const responseHandler = (res) => {
