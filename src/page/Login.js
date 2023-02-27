@@ -1,13 +1,13 @@
-import { useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../components/AuthContext';
+import {useContext, useState} from 'react';
+import {useNavigate} from 'react-router-dom';
+import {AuthContext} from '../components/AuthContext';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
 import "../css/login.css"
 
 function Login() {
-    const { isLoggedIn, setIsLoggedIn, username, setUsername } = useContext(AuthContext);
+    const {isLoggedIn, setIsLoggedIn, username, setUsername} = useContext(AuthContext);
     const [newUsername, setNewUsername] = useState('');
     const navigate = useNavigate();
     const handleSubmit = (event) => {
@@ -21,6 +21,9 @@ function Login() {
         <div className="containers d-flex justify-content-center">
             <Card style={{width: '18rem'}}>
                 <Card.Body>
+                    <div className="container d-flex justify-content-center">
+                        <Card.Title>User Login</Card.Title>
+                    </div>
                     <Form>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label>Pseudo</Form.Label>

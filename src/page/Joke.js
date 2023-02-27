@@ -24,7 +24,7 @@ function Joke() {
     });
 
     const getRes = () => {
-        payload.prompt = "Fait moi une blague sur ";
+        payload.prompt = "Fait moi une blague en français sur ";
         setLoading(true);
         payload.prompt = payload.prompt + prompt;
         console.log(payload.prompt);
