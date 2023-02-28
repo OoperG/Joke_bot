@@ -1,10 +1,10 @@
 import {Container, Nav, Navbar} from "react-bootstrap";
-import { AuthContext } from '../components/AuthContext';
+import { AuthContext } from './AuthContext';
 import { useContext } from 'react';
 
 function Navigation() {
 
-    const { isLoggedIn, setIsLoggedIn, username, setUsername } = useContext(AuthContext);
+    const {username} = useContext(AuthContext);
 
     return (
         <Navbar bg="dark" variant="dark">
