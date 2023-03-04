@@ -7,16 +7,40 @@ import Card from 'react-bootstrap/Card';
 import "../css/login.css"
 
 function Login() {
-    const {isLoggedIn, setIsLoggedIn, username, setUsername} = useContext(AuthContext);
-    const [newUsername, setNewUsername] = useState('');
-    const navigate = useNavigate();
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        setUsername(newUsername);
-        setIsLoggedIn(true);
-        setNewUsername('');
-        navigate('/joke');
-    };
+
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log("Send to API :", username, password);
+        fetch("http://localhost:8080/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                user_name: username,
+                password: password,
+            }),
+        })
+            .then((response) => {
+                console.log(response);
+                localStorage.setItem('username', username);
+                setError(false);
+                window.location = "/reformulation"
+                //console.log("go to login");
+                //window.location = "/";
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+                setError(true);
+                setErrorMessage("Error: " + error);
+            });
+    }
+
     return (
         <div className="containers d-flex justify-content-center">
             <Card style={{width: '18rem'}}>
@@ -30,15 +54,27 @@ function Login() {
                             <Form.Control
                                 type="text"
                                 placeholder="Enter pseudo"
-                                onChange={(e) => setNewUsername(e.target.value)}/>
+                                onChange={(e) => setUsername(e.target.value)}/>
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicPassword">
                             <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" placeholder="Password"/>
+                            <Form.Control
+                                type="password"
+                                placeholder="Password"
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
                         </Form.Group>
                         <Button variant="primary" type="submit" onClick={handleSubmit}>
                             Submit
                         </Button>
+                        <Form.Group className="mb-3" controlId="formBasicPassword">
+                            <Form.Label>not registered yet? <a href="/register">Register</a></Form.Label>
+                        </Form.Group>
+                        {error ?
+                            <Form.Group className="mb-3" controlId="formBasicPassword">
+                                <Form.Label>{error}</Form.Label>
+                            </Form.Group>
+                            : null}
                     </Form>
                 </Card.Body>
             </Card>

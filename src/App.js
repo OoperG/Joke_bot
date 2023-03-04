@@ -6,6 +6,7 @@ import Mail from "./page/Mail";
 import Reformulation from "./page/Reformulation";
 import {AuthProvider} from './components/AuthContext';
 import Login from "./page/Login";
+import Register from "./page/Register";
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
                     <Route path="/joke" element={<Joke/>}/>
                     <Route path="/mail" element={<Mail/>}/>
                     <Route path="/reformulation" element={<Reformulation/>}/>
+                    <Route path="/register" element={<Register/>}/>
                 </Routes>
             </BrowserRouter>
         </AuthProvider>

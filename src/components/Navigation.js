@@ -1,10 +1,21 @@
 import {Container, Nav, Navbar} from "react-bootstrap";
 import { AuthContext } from './AuthContext';
-import { useContext } from 'react';
+import {useContext, useEffect, useState} from 'react';
+import "../App.css"
 
 function Navigation() {
 
-    const {username} = useContext(AuthContext);
+    const [username, setUsername] = useState(localStorage.getItem('username') || '');
+
+    useEffect(() => {
+        // mise à jour du statut de connexion de l'utilisateur et du nom d'utilisateur
+        setUsername(localStorage.getItem('username') || '');
+    }, []);
+
+    const logout = () => {
+        localStorage.removeItem('username');
+        setUsername('');
+    }
 
     return (
         <Navbar bg="dark" variant="dark">
@@ -20,6 +31,9 @@ function Navigation() {
                         Signed in as: <a href="#login">{username}</a>
                     </Navbar.Text>
                 </Navbar.Collapse>
+                <Navbar.Text className="ml-5 logout-link">
+                    <a href="/" onClick={logout}>Logout</a>
+                </Navbar.Text>
             </Container>
         </Navbar>
     )
